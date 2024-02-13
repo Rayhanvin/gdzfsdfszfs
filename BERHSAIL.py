@@ -18,6 +18,7 @@ datasett = [
 def print_random_data(data):
     random_data = random.choice(data)
     st.write("Hello! New Challenge!\nLakukan satu kebaikan di bawah ini!\n",random_data['question'])
+    return random_data
 
 def main():
     user_input = st.text_input("Apakah kamu berhasil melakukan challengenya? (Ya/Tidak)")
@@ -26,6 +27,13 @@ def main():
         st.write("Nice! Very proud of you!")
     elif user_input.lower() == "tidak":
         st.write("Ayo coba lagi sampai bisa! (Ketik 'Ya' apabila kamu telah berhasil!)")
+    else:
+        st.write("Mohon masukkan jawaban 'Ya' atau 'Tidak'.")
+        return
+
+    random_data = print_random_data(dataset)
+    quiz(random_data)
+    jawaban(random_data)
 
 def quiz(random_data):
     user_answer = st.text_input("QUIZ! Sekarang ayo coba tebak, kira-kira nilai konfusius apa yang berhubungan dengan kebaikan yang barusan dilakukan?").strip()
@@ -47,10 +55,7 @@ def jawaban(random_data):
 
 def app():
     st.title("My Streamlit App")
-    random_data = print_random_data(dataset)
     main()
-    quiz(random_data)
-    jawaban(random_data)
 
 if __name__ == "__main__":
     app()
